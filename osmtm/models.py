@@ -67,6 +67,7 @@ import datetime
 from json import (
     JSONEncoder,
     dumps as _dumps,
+    loads as _loads
 )
 import functools
 
@@ -272,6 +273,7 @@ class Task(Base):
     y = Column(Integer)
     zoom = Column(Integer)
     project_id = Column(Integer, ForeignKey('project.id'), index=True)
+    import_url = Column(Unicode)
     geometry = Column(Geometry('MultiPolygon', srid=4326))
     date = Column(DateTime, default=datetime.datetime.utcnow)
     lock_date = Column(DateTime, default=None)
@@ -337,7 +339,7 @@ class Task(Base):
                       Index('task_lock_date_', date.desc()),
                       {},)
 
-    def __init__(self, x, y, zoom, geometry=None):
+    def __init__(self, x, y, zoom, geometry=None, import_url=None):
         self.x = x
         self.y = y
         self.zoom = zoom
@@ -347,7 +349,7 @@ class Task(Base):
             geometry = ST_Transform(shape.from_shape(multipolygon, 3857), 4326)
 
         self.geometry = geometry
-
+        self.import_url = import_url
         self.states.append(TaskState())
         self.locks.append(TaskLock())
 
@@ -513,12 +515,23 @@ class Project(Base, Translatable):
     def import_from_geojson(self, input):
 
         geoms = parse_geojson(input)
-
+        print "input"
+        print input
         tasks = []
+        geometries = []
         for geom in geoms:
             if not isinstance(geom, MultiPolygon):
                 geom = MultiPolygon([geom])
-            tasks.append(Task(None, None, None, 'SRID=4326;%s' % geom.wkt))
+            geometries.append('SRID=4326;%s' % geom.wkt)
+        geojson = _loads(input)
+        for index, feature in enumerate(geojson['features']):
+            props = feature['properties']
+            if props.has_key('import_url'):
+                import_url = props['import_url']
+            else:
+                import_url = None
+
+            tasks.append(Task(None, None, None, geometries[index], import_url))
 
         self.tasks = tasks
 

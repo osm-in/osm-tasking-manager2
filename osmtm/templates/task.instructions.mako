@@ -11,3 +11,13 @@
 %>
   <p>${content | markdown_filter, n}</p>
 % endif
+
+% if task.import_url:
+
+<p>
+    <a href="${task.import_url}" target="_blank">
+        ${task.import_url}
+    </a>
+</p>
+
+% endif
