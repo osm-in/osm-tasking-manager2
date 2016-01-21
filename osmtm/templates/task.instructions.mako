@@ -15,8 +15,8 @@
 % if task.import_url:
 
 <p>
-    <a href="${task.import_url}" target="_blank">
-        ${task.import_url}
+    <a href="http://localhost:8111/import?new_layer=true&url=${task.import_url}" target="_blank">
+        Open in JOSM
     </a>
 </p>
 
