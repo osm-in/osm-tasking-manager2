@@ -10,5 +10,16 @@
                      .replace('{z}', str(task.zoom))
 %>
   <p>${content | markdown_filter, n}</p>
+
+  % if task.import_url:
+
+  <div class="form-group">
+      <a class="btn btn-sm btn-default" href="http://localhost:8111/import?new_layer=true&url=${task.import_url}" target="_blank">
+          Download data in JOSM
+      </a>
+  </div>
+
+  % endif
+  
 % endif
 
