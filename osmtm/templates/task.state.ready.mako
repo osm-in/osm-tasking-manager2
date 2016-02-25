@@ -4,22 +4,35 @@
   unlocktip = _("Stop working on this task and unlock it. You may resume work on it again later.")
   donetip = _("Submit for review when all instructions are completed.")
   %>
-  <form action="${request.route_path('task_done', task=task.id, project=task.project_id)}" method="POST">
-    <%include file="task.comment.mako" />
-    <a id="unlock"
-       rel="tooltip"
-       data-container="body"
-       data-original-title="${unlocktip}"
-       class="btn btn-default"
-       href="${request.route_path('task_unlock', task=task.id, project=task.project_id)}">
-        ${_('Stop mapping')}
-    </a>
-    <button type="submit"
-      rel="tooltip"
-      data-container="body"
-      data-original-title="${donetip}"
-      class="btn btn-success">
-      <i class="glyphicon glyphicon-ok icon-white"></i> ${_("Mark task as done")}
-    </button>
-  </form>
+  <div class="form-group">
+    <form action="${request.route_path('task_done', task=task.id, project=task.project_id)}" method="POST">
+      <%include file="task.comment.mako" />
+      <a id="unlock"
+         rel="tooltip"
+         data-container="body"
+         data-original-title="${unlocktip}"
+         class="btn btn-default"
+         href="${request.route_path('task_unlock', task=task.id, project=task.project_id)}">
+          ${_('Stop mapping')}
+      </a>
+      <button type="submit"
+        rel="tooltip"
+        data-container="body"
+        data-original-title="${donetip}"
+        class="btn btn-success">
+        <i class="glyphicon glyphicon-ok icon-white"></i> ${_("Mark task as done")}
+      </button>
+    </form>
+  </div>
+
+  % if task.import_url:
+
+  <div class="form-group">
+      <a class="btn btn-sm btn-default" href="http://localhost:8111/import?new_layer=true&url=${task.import_url}" target="_blank">
+          Download data in JOSM
+      </a>
+  </div>
+
+  % endif
+
 % endif

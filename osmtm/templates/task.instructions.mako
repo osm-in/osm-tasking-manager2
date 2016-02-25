@@ -12,12 +12,3 @@
   <p>${content | markdown_filter, n}</p>
 % endif
 
-% if task.import_url:
-
-<p>
-    <a class="btn btn-sm btn-default" href="http://localhost:8111/import?new_layer=true&url=${task.import_url}" target="_blank">
-        Download data in JOSM
-    </a>
-</p>
-
-% endif
