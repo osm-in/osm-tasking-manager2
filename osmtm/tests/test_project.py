@@ -1,5 +1,5 @@
 from . import BaseTestCase
-
+import json
 
 class TestProjectFunctional(BaseTestCase):
 
@@ -140,7 +140,7 @@ class TestProjectFunctional(BaseTestCase):
         project = DBSession.query(Project).order_by(Project.id.desc()).first()
         self.assertEqual(len(project.tasks), 3)
 
-    def test_project_new_arbitrary_import_url(self):
+    def test_project_new_arbitrary_extra_properties(self):
         from osmtm.models import DBSession, Project
         headers = self.login_as_admin()
         self.testapp.post('/project/new/arbitrary',
@@ -152,7 +152,7 @@ class TestProjectFunctional(BaseTestCase):
                           status=302)
         project = DBSession.query(Project).order_by(Project.id.desc()).first()
         task1 = project.tasks[0]
-        self.assertEqual(task1.import_url, 'http://example.com/test.osm')
+        self.assertEqual(json.loads(task1.extra_properties)['import_url'], 'http://example.com/test.osm')
 
     def test_project_edit_forbidden(self):
         headers = self.login_as_user1()

@@ -67,6 +67,7 @@ import datetime
 from json import (
     JSONEncoder,
     dumps as _dumps,
+    loads as _loads,
 )
 import functools
 
@@ -78,6 +79,7 @@ from sqlalchemy_i18n import (
 
 from pyramid.threadlocal import get_current_registry
 
+import re
 
 class ST_Multi(GenericFunction):
     name = 'ST_Multi'
@@ -271,7 +273,7 @@ class Task(Base):
     x = Column(Integer)
     y = Column(Integer)
     zoom = Column(Integer)
-    import_url = Column(Unicode)
+    extra_properties = Column(Unicode)
     project_id = Column(Integer, ForeignKey('project.id'), index=True)
     geometry = Column(Geometry('MultiPolygon', srid=4326))
     date = Column(DateTime, default=datetime.datetime.utcnow)
@@ -338,11 +340,12 @@ class Task(Base):
                       Index('task_lock_date_', date.desc()),
                       {},)
 
-    def __init__(self, x, y, zoom, geometry=None, import_url=None):
+    def __init__(self, x, y, zoom, geometry=None, properties=None):
         self.x = x
         self.y = y
         self.zoom = zoom
-        self.import_url = import_url
+        if properties is not None:
+            self.extra_properties = _dumps(properties)
         if geometry is None:
             geometry = self.to_polygon()
             multipolygon = MultiPolygon([geometry])
@@ -368,11 +371,26 @@ class Task(Base):
             properties['x'] = self.x
             properties['y'] = self.y
             properties['zoom'] = self.zoom
+            if self.extra_properties:
+                properties.update(_loads(self.extra_properties))
         return Feature(
             geometry=shape.to_shape(self.geometry),
             id=self.id,
             properties=properties
         )
+
+    def get_extra_instructions(self):
+        instructions = self.project.per_task_instructions
+        instructions = instructions.replace('{x}', str(self.x))
+        instructions = instructions.replace('{y}', str(self.y))
+        instructions = instructions.replace('{z}', str(self.zoom))
+        if self.extra_properties:
+            props = _loads(self.extra_properties)
+            regex = re.compile(r'\{(.*?)\}')
+            for match in re.findall(regex, instructions):
+                if match in props:
+                    instructions = instructions.replace('{%s}' % match, props[match])
+        return instructions
 
 
 @event.listens_for(Task, "after_update")
@@ -521,14 +539,14 @@ class Project(Base, Translatable):
             if not isinstance(feature.geometry, MultiPolygon):
                 feature.geometry = MultiPolygon([feature.geometry])
 
-            import_url = feature.properties.get('import_url')
+            properties = feature.properties
 
             tasks.append(Task(
                 None,
                 None,
                 None,
                 'SRID=4326;%s' % feature.geometry.wkt,
-                import_url
+                properties
             ))
 
         self.tasks = tasks
