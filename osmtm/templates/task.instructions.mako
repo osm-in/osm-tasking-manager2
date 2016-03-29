@@ -7,5 +7,4 @@
 %>
   <p>${content | markdown_filter, n}</p>
 
-  <%include file="task.import_url.mako" />
 % endif
