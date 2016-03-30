@@ -20,9 +20,9 @@ import urlparse
 import oauth2 as oauth
 
 # our oauth key and secret (we're the consumer in the oauth protocol)
-# consumer key and secret created by Kate Chapman
-CONSUMER_KEY = 'BOFkVgLDXTSMP6VHfiX8MQ'
-CONSUMER_SECRET = '4o4uLSqLWMciG2fE2zGncLcdewPNi9wU1To51Iz2E'
+# consumer key and secret created by Sanjay B
+CONSUMER_KEY = 'dmr3yXLnVT8A1hDlVoxC3s6V209aOlije06d7SMR'
+CONSUMER_SECRET = 'fGm27WSyMFRuEf9vRYn4BCAmvMbMFhgpAXTvIqgN'
 
 # OSM oauth URLs
 BASE_URL = 'https://www.openstreetmap.org/oauth'
