@@ -92,7 +92,13 @@ sorts = [('priority', 'asc', _('High priority first')),
   <div class="col-md-6">
     <h3>${_('About the Tasking Manager')}</h3>
     <p>
-    ${_('OSM Tasking Manager is a mapping tool designed and built for the Humanitarian OSM Team collaborative mapping. The purpose of the tool is to divide up a mapping job into smaller tasks that can be completed rapidly. It shows which areas need to be mapped and which areas need the mapping validated. <br />This approach facilitates the distribution of tasks to the various mappers in a context of emergency. It also permits to control the progress and the homogeneity of the work done (ie. Elements to cover, specific tags to use, etc.).')|n}
+    ${_('This Tasking Manager is a custom deployment for coordinating the LA County building import. More information about this import is on the <a href="https://wiki.openstreetmap.org/wiki/Los_angeles,_California/Buildings_Import">OpenStreetMap wiki</a> and on <a href="https://github.com/osmlab/labuildings">Github</a>.')|n}
+    </p>
+    <p>
+    ${_('OSM Tasking Manager is a mapping tool designed and built for the Humanitarian OSM Team collaborative mapping. The purpose of the tool is to divide up a mapping job into smaller tasks that can be completed rapidly. It shows which areas need to be mapped and which areas need their mapping validated.')|n}
+    </p>
+    <p>
+    ${_('This approach helps us monitor the progress and the homogeneity of the work done (ie. which elements to cover, specific tags to use, etc.).')}
     </p>
     <hr />
     <p>
