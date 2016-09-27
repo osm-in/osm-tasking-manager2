@@ -157,7 +157,7 @@ def main(global_config, **settings):
     bleach.ALLOWED_TAGS.append(u'p')
     bleach.ALLOWED_TAGS.append(u'pre')
 
-    scheduler.add_job(check_task_expiration, 'interval', seconds=5,
+    scheduler.add_job(check_task_expiration, 'interval', seconds=120,
                       replace_existing=True)
 
     return config.make_wsgi_app()
