@@ -53,7 +53,7 @@ def main():
         Area.__table__.c.centroid.type.management = True
         Task.__table__.c.geometry.type.management = True
 
-    Base.metadata.drop_all(engine)
+    # Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
     # then, load the Alembic configuration and generate the
