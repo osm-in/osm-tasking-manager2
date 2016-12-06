@@ -1,35 +1,46 @@
 <%def  name="instance_name()">
-  OSM Tasking Manager
+  Mapbox Tasking Manager
 </%def>
 
 <%def  name="about_tasking_manager_intro()">
     <p>
-    ${_('OSM Tasking Manager is a mapping tool designed and built for the Humanitarian OSM Team collaborative mapping. The purpose of the tool is to divide up a mapping job into smaller tasks that can be completed rapidly. It shows which areas need to be mapped and which areas need the mapping validated.')}
+    ${_('Mapbox Tasking Manager is a tool to coordinate and manage collaborative mapping projects around the world. The purpose of the tool is to divide up a mapping job into smaller tasks that can be completed rapidly. It highlights the areas need to be mapped and areas which need the mapping validated.')}
     </p>
     <p>
-    ${_('This approach facilitates the distribution of tasks to the various mappers in a context of emergency. It also permits control of the progress and the homogeneity of the work done (e.g. elements to cover, specific tags to use, etc.).')}
+    ${_('This approach facilitates the distribution of tasks among various mappers and avoids conflicts between the mappers working around the same region. It also permits control of the progress and the homogeneity of the work done (e.g. elements to cover, specific tags to use, imagery offset etc.).')}
+    </p>
+    <p>
+    ${_('Select one of the projects from the list and read through instructions to start mapping.')}
     </p>
 </%def>
 
 
 <%def  name="main_page_right_panel()">
-    <h3>${_('About the Tasking Manager')}</h3>
+    <h3>${_('About the Mapbox Tasking Manager')}</h3>
     ${about_tasking_manager_intro()}
     <hr />
-    <h4>${_('New to Mapping?')}</h4>
+    <h4>${_('History')}</h4>
     <p>
-    ${_('Just jump over to <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap</a>, create an account, and then visit the LearnOSM tutorials on the <a target="_blank" href="http://learnosm.org/en/coordination/tasking-manager/">Tasking Manager</a> and the <a target="_blank" href="http://learnosm.org/en/beginner/id-editor">iD editor</a>. Alternatively check out the <a target="_blank" href="http://mapgive.state.gov">MapGive website</a> which also provides information on the Tasking Manager and mapping. Once you have read up on how to map, come back here to help map for people on the ground!')|n}
+    ${_('Mapbox Tasking Manager is a customised forked version of the <a href="http://tasks.hotosm.org/" target="_blank">HOT\'s Tasking Manager</a>. The original <a href="http://tasks.openstreetmap.in/" target="_blank">OSM Tasking Manager</a> was designed and built for the <a href="https://hotosm.org/" target="_blank">Humanitarian OSM Team</a> collaborative mapping in context of emergency mapping.')|n}
+    </p>
+    <p>
+    ${_('Please visit <a href="http://tasks.hotosm.org/" target="_blank">HOT Tasking Manager</a> to support and contribute for emergency/disaster mapping projects.')|n}
+    </p>
+    <p>
+    ${_('Here is the <a href="https://github.com/hotosm/osm-tasking-manager2" target="_blank">GitHub</a> repository for development of HOT\'s tasking manager.')|n}
     </p>
     <hr>
-    <h4>${_('Questions About Tasks, Mapping or HOT?')}</h4>
+    <h4>${_('New to Mapping?')}</h4>
     <p>
-    ${_('If you have any questions about a project, a task or mapping in general please ask on our mailing list: <a href="https://lists.openstreetmap.org/listinfo/hot">HOT E-Mail List</a>.')|n}
+    ${_('Just jump over to <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>, create an account, and then refer to these <a href="https://www.mapbox.com/mapping/" target="_blank">guides</a> to get started with mapping. Also visit the <a href="http://learnosm.org/en/coordination/tasking-manager/" target="_blank">LearnOSM tutorials</a> on the Tasking Manager. Once you have read up on how to map, come back here to support mapping project and help map for people on the ground!')|n}
+    </p>
+    <hr>
+    <h4>${_('Questions About Tasks, Mapping Projects?')}</h4>
+    <p>
+    ${_('Check out our mapping repository on <a href="https://github.com/mapbox/mapping" target="_blank">GitHub</a> for details of the project and comment on the issues for feedback, suggestions and questions.')|n}
     </p>
     <p>
-    ${_('Or visit us in our IRC Chat Channel, just select #hot from the pop down channel list: <a href="http://irc.openstreetmap.org/">OSM HOT IRC Channel #hot</a>.')|n}
-    </p>
-    <p>
-    ${_('General inquries and comments are welcomed at: <a href="mailto:info@hotosm.org" target="_top">info@hotosm.org</a>.')|n}
+    ${_('If you would like to host a community mapping project on the instance, please open a <a href="https://github.com/mapbox/mapping/issues/248" target="_blank">request on the Mapbox mapping repository</a>. For further queries on a task/project or mapping in general, please feel free to <a href="http://wiki.openstreetmap.org/wiki/Mapbox#Mapbox_Data_Team" target="_blank">get in touch</a> with us.')|n}
     </p>
 </%def>
 
@@ -68,6 +79,7 @@
       background: #e82;
       box-shadow: 0 0 3px rgba(0,0,0,.3);
       position: fixed;
+      display: none;
     }
     .corner-ribbon a {
       color: #f0f0f0;
