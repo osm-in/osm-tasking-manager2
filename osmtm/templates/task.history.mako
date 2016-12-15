@@ -35,13 +35,13 @@ from osmtm.mako_filters import (
       % if isinstance(step, TaskState):
         % if step.state == step.state_done:
           <span><i class="glyphicon glyphicon-ok text-success"></i> 
-          ${_('${user|h} marked ${tasklink} as <b>done</b>', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
+          ${_('${user} marked ${tasklink} as <b>done</b>', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
         % elif step.state == step.state_invalidated:
           <span><i class="glyphicon glyphicon-thumbs-down text-danger"></i> 
-          ${_('${user|h} <b>invalidated</b> ${tasklink}', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
+          ${_('${user} <b>invalidated</b> ${tasklink}', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
         % elif step.state == step.state_validated:
           <span><i class="glyphicon glyphicon-thumbs-up text-success"></i> 
-          ${_('${user|h} <b>validated</b> ${tasklink}', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
+          ${_('${user} <b>validated</b> ${tasklink}', mapping={'user':user_link, 'tasklink':task_link}) | n}</span>
         % endif
       % endif
     % else:
